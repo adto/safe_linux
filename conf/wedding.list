@@ -1,0 +1,4 @@
+entry net
+roottask moe --init=rom/net
+module l4re
+module net
