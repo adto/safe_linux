@@ -5,10 +5,20 @@
  */
 #include <stdio.h>
 #include <unistd.h>
+//#include <linux/socket.h>
+//#include <foo.h>
+
+//extern void foo(void);
 
 int
 main(void)
 {
+
+
+	//foo();
+
+
+
   for (;;)
     {
       puts("Net: Test1! :)");

@@ -7,3 +7,5 @@ L4DIR	?= $(PKGDIR)/../../../l4re-snapshot-21.07.0/src/l4
 # TARGET = include src lib server examples doc
 
 include $(L4DIR)/mk/subdir.mk
+
+server: lib

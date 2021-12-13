@@ -1,4 +1,4 @@
-# wedding
+# The great wedding project
 The great wedding will be taken place here :) 
 
 # Intial configuration:
@@ -11,6 +11,8 @@ MODULE_SEARCH_PATH = $(SOMEDIR)/build-fiasco-aarch64:$(SOMEDIR)/ramdisk:$(SOMEDI
 4. Extend /l4re-snapshot-21.07.0/src/l4/conf/Makeconf.boot with extra line for QUMU extension:  
 QEMU_OPTIONS-arm64 = -M virt,virtualization=true -cpu cortex-a57 -m 1024 -display none  
 
+# Migrate make from Linux to L4Re
+`~/dome/wedding/tool$ python3 wedding_cli.py -a migrate -l ../../build-linux-aarch64/ -o .`
 
 # Build & run custom package:
 `~/dome/wedding/pkg/net$ make O=../../../build-l4-aarch64`  
