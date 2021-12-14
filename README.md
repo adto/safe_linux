@@ -14,6 +14,9 @@ QEMU_OPTIONS-arm64 = -M virt,virtualization=true -cpu cortex-a57 -m 1024 -displa
 # Migrate make from Linux to L4Re
 `~/dome/wedding/tool$ python3 wedding_cli.py -a migrate -l ../../build-linux-aarch64/ -o .`
 
+# Analyse object references of Linux kernel
+`~/dome/wedding/tool$ python3 wedding_cli.py -a analyse -l ../../build-linux-aarch64/ -o .`
+
 # Build & run custom package:
 `~/dome/wedding/pkg/net$ make O=../../../build-l4-aarch64`  
 `~/dome/build-l4-aarch64$ make E=net qemu`
@@ -21,4 +24,9 @@ QEMU_OPTIONS-arm64 = -M virt,virtualization=true -cpu cortex-a57 -m 1024 -displa
 # Troubleshooting
 1. virt-arm_virt-64.dtb had to move to the right  location inside L4 src.   
 2. bootargs = "console=hvc0 earlyprintk=1 rdinit=/bin/sh", was fixed for uvmm lua files, to avoid linux kernel panik  
+
+# Notes
+Quelltextzeilen gezählt mit: `find . -type f -not -regex '\./\.git.*'|xargs cat|wc -l`
+
+
  

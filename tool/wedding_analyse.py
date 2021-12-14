@@ -51,7 +51,7 @@ def extract_file(input, linux_build_path):
     for i in range(len(input)):
         
         if ".o" in input[i]:
-            ret += (path + "/" + input[i])
+            ret += (linux_build_path + "/" + input[i])
         else:
             ret += (find_file(extension=".o", path=linux_build_path + "/" + input[i])) 
             
@@ -125,8 +125,7 @@ def do_analyse(args):
     for (dirpath, dirnames, filenames) in walk(linux_build_path):
         for i in range(len(dirnames)):         
             if dirnames[i] != "source" and \
-            dirnames[i] != ".git" and \
-            dirnames[i] != "drivers":        
+            dirnames[i] != ".git":        
                 file_list = file_list + find_file(extension=".o", path=linux_build_path + "/" + dirnames[i])          
         break
  
@@ -151,7 +150,8 @@ def do_analyse(args):
     
     #do some analysis, inputs are: 
     #input = ["net", "fs", "block", "certs", "crypto", "security", "lib", "arch/arm64/crypto", "arch/arm64/lib"]
-    input = ["net"]
+    #input = ["net"]
+    input = ["net/socket.o"]
     
     #create input file list
     input_files = extract_file(input, linux_build_path)
