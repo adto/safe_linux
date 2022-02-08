@@ -43,21 +43,21 @@ def find_file(extension,path):
             if filenames[i].endswith(extension):
                 ret.append(dirpath + "/" +filenames[i]) 
                 
+    #print(ret)            
     return ret
 
 def extract_file(input, linux_build_path):
     
     ret = []
     for i in range(len(input)):
-        
+              
         if ".o" in input[i]:
-            ret += (linux_build_path + "/" + input[i])
+            ret.append(linux_build_path + "/" + input[i])
         else:
             ret += (find_file(extension=".o", path=linux_build_path + "/" + input[i])) 
             
     ret = remove_duplicate(ret)
     ret.sort()
-    #print(ret)
 
     return ret                  
          
@@ -128,8 +128,6 @@ def do_analyse(args):
             dirnames[i] != ".git":        
                 file_list = file_list + find_file(extension=".o", path=linux_build_path + "/" + dirnames[i])          
         break
- 
-    print(file_list)
     
     db = {}
     db_def = {}
@@ -151,11 +149,16 @@ def do_analyse(args):
     #do some analysis, inputs are: 
     #input = ["net", "fs", "block", "certs", "crypto", "security", "lib", "arch/arm64/crypto", "arch/arm64/lib"]
     #input = ["net"]
-    input = ["net/socket.o"]
-    
+    #input = ["net/socket.o"]
+    #input = ["kernel", "lib", "arch/arm64/lib", "mm", "init" ]
+    input = ["kernel", "arch/arm64", "mm", "lib", "crypto", "security", "virt"]
+             
     #create input file list
     input_files = extract_file(input, linux_build_path)
 
+
+    print(input_files)
+    
     #fill out db_out["sym"] dict     
     for j in range(len(input_files)):
         syms = db_undef[input_files[j]]
@@ -185,7 +188,8 @@ def do_analyse(args):
           
     #do some printing    
     for file_key in sorted(db_out):
-        print (file_key, db_out[file_key])
+        if file_key is not "sym":
+            print (file_key, db_out[file_key])
     
     
     
